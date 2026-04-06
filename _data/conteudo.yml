@@ -1,24 +1,22 @@
 figuras:
   - nome: "Sophia de Mello Breyner"
-    imagem: "https://static.wixstatic.com/media/745c34_e36f82ed6b9482dab5fc525990a856e7.jpeg"
-    bio: "A poetisa que imortalizou o mar e a infância na Granja.
-    De todos os cantos do mundo.
-    Amo com um amor mais forte e mais profundo.
-    Aquela praia extasiada e nua.
-    Onde me uni ao mar, ao vento e à lua.
-    Há muito que deixei aquela praia de grandes areais e grandes vagas.
-    Mas sou eu ainda quem na brisa respira e é por mim que espera cintilando a maré vasa."
- 
+    imagem: "https://via.placeholder.com/400x300"
+    bio: "A poetisa que imortalizou o mar e a infância na Granja."
+    link: "/sophia-mello-breyner"
   - nome: "Eça de Queirós"
     imagem: "https://via.placeholder.com/400x300"
     bio: "O grande romancista que encontrou na Granja o seu refúgio."
+    link: "/eca-de-queiros"
   - nome: "Ramalho Ortigão"
     imagem: "https://via.placeholder.com/400x300"
     bio: "Escritor e crítico, impulsionador da Granja balnear."
+    link: "/ramalho-ortigao"
   - nome: "Antero de Quental"
     imagem: "https://via.placeholder.com/400x300"
     bio: "O filósofo e poeta que frequentava os verões da nossa praia."
+    link: "/antero-de-quental"
   - nome: "Rei D. Luís I"
     imagem: "https://via.placeholder.com/400x300"
     bio: "A presença da Família Real que deu distinção à Granja."
+    link: "/rei-dom-luis"
     
