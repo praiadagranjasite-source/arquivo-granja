@@ -1,1 +1,8 @@
-
+figuras:
+  - nome: "Sophia de Mello Breyner"
+    imagem: "https://via.placeholder.com/400x300"
+    bio: "A poetisa que imortalizou o mar e a infância na Granja."
+  - nome: "Eça de Queirós"
+    imagem: "https://via.placeholder.com/400x300"
+    bio: "Onde encontrou o seu refúgio de verão."
+    
