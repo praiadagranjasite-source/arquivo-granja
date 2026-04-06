@@ -5,4 +5,10 @@ figuras:
   - nome: "Eça de Queirós"
     imagem: "https://via.placeholder.com/400x300"
     bio: "Onde encontrou o seu refúgio de verão."
-    
+      - nome: "Ramalho Ortigão"
+    imagem: "https://via.placeholder.com/400x300"
+    bio: "Amigo de Eça, foi uma das figuras centrais da Geração de 70 que frequentava a Granja."
+  - nome: "Rei D. Luís I"
+    imagem: "https://via.placeholder.com/400x300"
+    bio: "A presença da família real foi decisiva para tornar a Granja a estância balnear de eleição."
+  - nome:
