@@ -2,55 +2,46 @@
 layout: default
 ---
 <style>
-  /* --- 1. RESOLVER O TAMANHO DA LETRA --- */
-  .post-content {
-    font-size: 1.35rem !important; /* Letra muito maior e mais legível */
-    line-height: 1.65 !important;
-    color: #222 !important;
-    font-family: sans-serif; /* Garante uma fonte limpa */
-    margin-top: 25px;
+  /* FORÇAR TAMANHO DA LETRA - O !important obriga o tema a mudar */
+  body, .post, .post-content, p, li {
+    font-size: 1.4rem !important; /* Letra bem grande */
+    line-height: 1.7 !important;
+    color: #1a1a1a !important;
   }
 
-  /* --- 2. CRIAR O DESIGN DA TUA IMAGEM --- */
-  /* Contentor dos Ícones lado a lado */
-  .icones-topo {
+  .post-title, h1 {
+    font-size: 2.8rem !important;
+    margin-bottom: 10px !important;
+  }
+
+  /* CONTENTOR DO ÍCONE NO CANTO DIREITO */
+  .header-com-audio {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: flex-start; /* Alinhados à esquerda */
-    gap: 15px; /* Espaço entre a estrela e o som */
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
     margin-bottom: 20px;
   }
 
-  /* Estilo da Estrela Azul flutuante */
-  .estrela-azul {
-    width: 25px;
-    height: 25px;
-    background-color: #007bff; /* Azul */
-    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Forma de Estrela */
-  }
-
-  /* Estilo do Botão de Altifalante */
-  .botao-som {
-    font-size: 20px; /* Tamanho do ícone */
-    color: #444; /* Cor cinza como na imagem */
+  /* O ÍCONE DE COLUNA (ALTIFALANTE) */
+  .botao-coluna {
+    font-size: 35px; /* Ícone grande para ser fácil de clicar */
     cursor: pointer;
     background: none;
     border: none;
-    padding: 0;
-    line-height: 1;
+    padding: 10px;
+    transition: transform 0.2s;
   }
 
-  .botao-som:hover { color: #007bff; } /* Azul ao passar o rato */
-  .botao-som:active { transform: scale(0.95); } /* Animação ao clicar */
+  .botao-coluna:active { transform: scale(0.9); }
 </style>
 
 <article class="post">
-  <h1 style="font-size: 2.5rem; margin-bottom: 5px; color: #1a1a1a;">{{ page.title }}</h1>
-  
-  <div class="icones-topo">
-    <div class="estrela-azul"></div>
+  <div class="header-com-audio">
+    <h1>{{ page.title }}</h1>
     
-    <button id="btn-audio-top" class="botao-som" title="Clica para ouvir a biografia">🔊</button>
+    <button id="btn-coluna" class="botao-coluna" title="Ouvir">🔊</button>
   </div>
 
   <div class="post-content" id="texto-biografia">
@@ -59,40 +50,30 @@ layout: default
 </article>
 
 <script>
-  let isPlaying = false; // Controlo de estado (se está a tocar ou não)
+  let falando = false;
 
-  document.getElementById('btn-audio-top').onclick = function() {
-    // 1. Se estiver a tocar, para imediatamente
-    if (isPlaying) {
+  document.getElementById('btn-coluna').onclick = function() {
+    if (falando) {
       window.speechSynthesis.cancel();
-      isPlaying = false;
-      this.innerHTML = "🔊"; // Volta a mostrar o som normal
-      this.style.color = "#444";
-      this.title = "Clica para ouvir a biografia";
-      return; // Sai da função
+      falando = false;
+      this.innerHTML = "🔊";
+      return;
     }
 
-    // 2. Se não estiver a tocar, começa a ler
-    window.speechSynthesis.cancel(); // Cancela vozes antigas
+    window.speechSynthesis.cancel();
     
+    // Captura o texto da biografia
     const texto = document.getElementById('texto-biografia').innerText;
-    const fala = new SpeechSynthesisUtterance(texto);
-    fala.lang = 'pt-PT'; // Voz de Portugal
+    const msg = new SpeechSynthesisUtterance(texto);
+    msg.lang = 'pt-PT';
 
-    window.speechSynthesis.speak(fala);
-    isPlaying = true;
-    
-    // 3. Muda o ícone para "Parar" (ex: um botão de paragem)
-    this.innerHTML = "🛑"; 
-    this.style.color = "#dc3545"; // Vermelho para indicar "Parar"
-    this.title = "Clica para parar a leitura";
+    window.speechSynthesis.speak(msg);
+    falando = true;
+    this.innerHTML = "🛑"; // Muda para parar enquanto fala
 
-    // 4. Quando a voz terminar sozinha, volta ao normal
-    fala.onend = () => {
-      isPlaying = false;
+    msg.onend = () => {
+      falando = false;
       this.innerHTML = "🔊";
-      this.style.color = "#444";
-      this.title = "Clica para ouvir a biografia";
     };
   };
 </script>
