@@ -7,6 +7,7 @@ title: Eça de Queirós
 Eça de Queirós foi um dos mais assíduos frequentadores da Granja. Aqui, entre os "banhos de mar" e as tertúlias sociais, o escritor encontrou inspiração para as suas crónicas. 
 
 A elite intelectual da época reunia-se nesta praia, transformando-a num centro cultural de veraneio único em Portugal.
+
 Eça de Queirós, o grande mestre do realismo português, tinha uma relação de amor e ironia com a Praia da Granja. Para ele, a Granja não era apenas um local de veraneio; era o epicentro da sofisticação e do "chic" da alta burguesia e aristocracia do final do século XIX.
 
 Aqui está um resumo de como ele a via e descrevia:
