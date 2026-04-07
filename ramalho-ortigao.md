@@ -16,12 +16,26 @@ layout: page
 </div>
 
 <div id="texto-biografia">
-
----
-layout: page
-title: Ramalho Ortigão
----
-
+<script>
+  let falando = false;
+  document.getElementById('btn-coluna').onclick = function() {
+    if (falando) {
+      window.speechSynthesis.cancel();
+      falando = false;
+      this.innerHTML = "🔊";
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const texto = document.getElementById('texto-biografia').innerText;
+    const msg = new SpeechSynthesisUtterance(texto);
+    msg.lang = 'pt-PT';
+    window.speechSynthesis.speak(msg);
+    falando = true;
+    this.innerHTML = "🛑";
+    msg.onend = () => { falando = false; this.innerHTML = "🔊"; };
+  };
+</script>
+  
 # Ramalho Ortigão e o Veraneio na Granja
 
 Ramalho Ortigão, autor das célebres *"Farpas"*, foi um dos maiores entusiastas da Praia da Granja como local de distinção e saúde.
