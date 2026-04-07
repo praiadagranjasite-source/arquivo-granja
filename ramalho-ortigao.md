@@ -1,8 +1,3 @@
----
-layout: page
-title: Ramalho Ortigão
----
-
 <style>
   /* FORÇAR TAMANHO DA LETRA E LEGIBILIDADE */
   .post-content, .page-content, #texto-biografia {
