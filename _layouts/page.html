@@ -1,20 +1,74 @@
 ---
 layout: default
 ---
+<style>
+  /* Ajuste de Texto */
+  .post-content {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: #333;
+    margin-top: 20px;
+  }
+
+  /* Botão de Áudio no Topo (Estilo Coluna/Ícone) */
+  .audio-top-btn {
+    float: right;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8f9fa;
+    border: 1px solid #007bff;
+    padding: 8px 15px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+
+  .audio-top-btn:hover {
+    background: #007bff;
+    color: white;
+  }
+
+  /* Ajuste para não quebrar o título */
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 500px) {
+    .header-container { flex-direction: column; }
+    .audio-top-btn { margin-top: 10px; width: 100%; justify-content: center; }
+  }
+</style>
+
 <article class="post">
-  <h1>{{ page.title }}</h1>
+  <div class="header-container">
+    <h1 style="margin: 0; font-size: 2.2rem;">{{ page.title }}</h1>
+    
+    <button onclick="document.getElementById('seccao-audio').scrollIntoView({behavior: 'smooth'})" class="audio-top-btn">
+      <span>Ouvir Biografia</span> 🔊
+    </button>
+  </div>
 
   <div class="post-content">
     {{ content }}
   </div>
 
-  <div style="margin-top: 50px; padding: 20px; border: 2px solid #007bff; border-radius: 15px; text-align: center; background-color: #f8f9fa;">
-    <p style="margin-bottom: 10px; font-weight: bold; color: #333;">📢 Gostaria de ouvir este texto?</p>
-    <button id="btn-ouvir" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 16px;">
-      ▶️ Reproduzir Áudio
+  <div id="seccao-audio" style="margin-top: 60px; padding: 20px; border-radius: 15px; background: #f1f8ff; text-align: center; border: 1px solid #d0e7ff;">
+    <p style="margin-bottom: 15px; font-weight: bold;">Controlo de Voz</p>
+    <button id="btn-ouvir" style="padding: 12px 25px; background: #007bff; color: white; border: none; border-radius: 30px; cursor: pointer; font-size: 16px;">
+      ▶️ Iniciar Narração
     </button>
-    <button id="btn-parar" style="padding: 12px 25px; background-color: #dc3545; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 16px; display: none;">
-      🛑 Parar Leitura
+    <button id="btn-parar" style="padding: 12px 25px; background: #dc3545; color: white; border: none; border-radius: 30px; cursor: pointer; font-size: 16px; display: none;">
+      🛑 Parar
     </button>
   </div>
 </article>
@@ -24,11 +78,9 @@ layout: default
   const btnParar = document.getElementById('btn-parar');
 
   btnOuvir.onclick = function() {
-    // Captura o texto apenas desta biografia
     const texto = document.querySelector('.post-content').innerText;
     const fala = new SpeechSynthesisUtterance(texto);
-    fala.lang = 'pt-PT'; // Voz de Portugal
-    
+    fala.lang = 'pt-PT';
     window.speechSynthesis.speak(fala);
     
     btnOuvir.style.display = 'none';
@@ -45,5 +97,5 @@ layout: default
     btnOuvir.style.display = 'inline-block';
     btnParar.style.display = 'none';
   };
-</script>
-
+      </script>
+      
