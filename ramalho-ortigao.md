@@ -53,7 +53,7 @@ title: Ramalho Ortigão
 
 Ramalho Ortigão, autor das célebres *"Farpas"*, foi um dos maiores entusiastas da Praia da Granja como local de distinção e saúde.
 
-<img src="URL_DA_TUA_IMAGEM_1" class="img-biografia">
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Ramalho_Ortigao_01.JPG" class="img-biografia">
 <p class="legenda-img">Legenda da primeira foto.</p>
 
 O Estilo de Vida: Ramalho via na Granja o equilíbrio perfeito entre a segurança e a vida social elegante.
@@ -62,7 +62,7 @@ O Estilo de Vida: Ramalho via na Granja o equilíbrio perfeito entre a seguranç
 
 Ele fazia parte do grupo de intelectuais que transformou esta praia no centro do pensamento português durante os meses de verão.
 
-<img src="URL_DA_TUA_IMAGEM_2" class="img-biografia">
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/Ramalho_Ortigao_01.JPG" class="img-biografia">
 <p class="legenda-img">Legenda da segunda foto.</p>
 
 </div>
