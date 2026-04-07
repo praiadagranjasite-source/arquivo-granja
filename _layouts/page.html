@@ -2,65 +2,55 @@
 layout: default
 ---
 <style>
-  /* Tamanho de letra confortável para leitura */
+  /* --- 1. RESOLVER O TAMANHO DA LETRA --- */
   .post-content {
-    font-size: 1.3rem; 
-    line-height: 1.6;
-    color: #1a1a1a;
-    margin-top: 30px;
+    font-size: 1.35rem !important; /* Letra muito maior e mais legível */
+    line-height: 1.65 !important;
+    color: #222 !important;
+    font-family: sans-serif; /* Garante uma fonte limpa */
+    margin-top: 25px;
   }
 
-  /* Painel de Áudio Compacto no Topo */
-  .audio-control-panel {
-    background: #f0f7ff;
-    border: 2px solid #007bff;
-    border-radius: 12px;
-    padding: 15px;
-    margin: 20px 0;
+  /* --- 2. CRIAR O DESIGN DA TUA IMAGEM --- */
+  /* Contentor dos Ícones lado a lado */
+  .icones-topo {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 15px;
+    justify-content: flex-start; /* Alinhados à esquerda */
+    gap: 15px; /* Espaço entre a estrela e o som */
+    margin-bottom: 20px;
   }
 
-  .btn-audio {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 25px;
-    font-weight: bold;
+  /* Estilo da Estrela Azul flutuante */
+  .estrela-azul {
+    width: 25px;
+    height: 25px;
+    background-color: #007bff; /* Azul */
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); /* Forma de Estrela */
+  }
+
+  /* Estilo do Botão de Altifalante */
+  .botao-som {
+    font-size: 20px; /* Tamanho do ícone */
+    color: #444; /* Cor cinza como na imagem */
     cursor: pointer;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: transform 0.2s;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
   }
 
-  .btn-audio:active { transform: scale(0.95); }
-
-  #btn-ouvir { background: #007bff; color: white; }
-  #btn-parar { background: #dc3545; color: white; display: none; }
-
-  .status-voz {
-    font-size: 0.9rem;
-    color: #0056b3;
-    font-weight: bold;
-  }
+  .botao-som:hover { color: #007bff; } /* Azul ao passar o rato */
+  .botao-som:active { transform: scale(0.95); } /* Animação ao clicar */
 </style>
 
 <article class="post">
-  <h1 style="font-size: 2.4rem; margin-bottom: 10px; color: #2c3e50;">{{ page.title }}</h1>
+  <h1 style="font-size: 2.5rem; margin-bottom: 5px; color: #1a1a1a;">{{ page.title }}</h1>
   
-  <div class="audio-control-panel">
-    <span class="status-voz">🔊 Ouvir Biografia:</span>
+  <div class="icones-topo">
+    <div class="estrela-azul"></div>
     
-    <button id="btn-ouvir" class="btn-audio">
-      ▶️ Reproduzir
-    </button>
-    
-    <button id="btn-parar" class="btn-audio">
-      🛑 Parar
-    </button>
+    <button id="btn-audio-top" class="botao-som" title="Clica para ouvir a biografia">🔊</button>
   </div>
 
   <div class="post-content" id="texto-biografia">
@@ -69,36 +59,40 @@ layout: default
 </article>
 
 <script>
-  const btnOuvir = document.getElementById('btn-ouvir');
-  const btnParar = document.getElementById('btn-parar');
+  let isPlaying = false; // Controlo de estado (se está a tocar ou não)
 
-  btnOuvir.onclick = function() {
-    // 1. Cancela qualquer voz que esteja a decorrer
-    window.speechSynthesis.cancel();
+  document.getElementById('btn-audio-top').onclick = function() {
+    // 1. Se estiver a tocar, para imediatamente
+    if (isPlaying) {
+      window.speechSynthesis.cancel();
+      isPlaying = false;
+      this.innerHTML = "🔊"; // Volta a mostrar o som normal
+      this.style.color = "#444";
+      this.title = "Clica para ouvir a biografia";
+      return; // Sai da função
+    }
 
-    // 2. Captura o texto
+    // 2. Se não estiver a tocar, começa a ler
+    window.speechSynthesis.cancel(); // Cancela vozes antigas
+    
     const texto = document.getElementById('texto-biografia').innerText;
     const fala = new SpeechSynthesisUtterance(texto);
     fala.lang = 'pt-PT'; // Voz de Portugal
-    fala.rate = 1.0;
 
-    // 3. Inicia a fala
     window.speechSynthesis.speak(fala);
+    isPlaying = true;
+    
+    // 3. Muda o ícone para "Parar" (ex: um botão de paragem)
+    this.innerHTML = "🛑"; 
+    this.style.color = "#dc3545"; // Vermelho para indicar "Parar"
+    this.title = "Clica para parar a leitura";
 
-    // 4. Muda o estado dos botões
-    btnOuvir.style.display = 'none';
-    btnParar.style.display = 'flex';
-
-    // Quando terminar, volta ao estado inicial
+    // 4. Quando a voz terminar sozinha, volta ao normal
     fala.onend = () => {
-      btnOuvir.style.display = 'flex';
-      btnParar.style.display = 'none';
+      isPlaying = false;
+      this.innerHTML = "🔊";
+      this.style.color = "#444";
+      this.title = "Clica para ouvir a biografia";
     };
-  };
-
-  btnParar.onclick = function() {
-    window.speechSynthesis.cancel();
-    btnOuvir.style.display = 'flex';
-    btnParar.style.display = 'none';
   };
 </script>
