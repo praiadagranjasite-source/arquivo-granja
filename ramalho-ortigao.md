@@ -1,3 +1,8 @@
+---
+layout: page
+title: Ramalho Ortigão
+---
+
 <style>
   /* FORÇAR TAMANHO DA LETRA E LEGIBILIDADE */
   .post-content, .page-content, #texto-biografia {
@@ -48,15 +53,19 @@
 
 <div id="texto-biografia">
 
-## Ramalho Ortigão e o Veraneio na Granja
+  Ramalho Ortigão e o Veraneio na Granja
 
-Ramalho Ortigão, autor das célebres *"Farpas"*, foi um dos maiores entusiastas da Praia da Granja como local de distinção e saúde.
+Ramalho Ortigão, 
+Autor das célebres "Farpas", 
+Foi um dos maiores entusiastas da Praia da Granja como local de distinção e saúde.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/e/ed/Retrato_de_Ramalho_Ortig%C3%A3o_-_Columbano_Bordalo_Pinheiro.jpg" class="img-biografia" alt="Retrato de Ramalho Ortigão por Columbano Bordalo Pinheiro">
 <p class="legenda-img">Retrato de Ramalho Ortigão por Columbano Bordalo Pinheiro, c. 1888-1890.</p>
 
-* **O Estilo de Vida:** Ramalho via na Granja o equilíbrio perfeito entre o repouso e a vida social elegante.
-* **Os Banhos de Mar:** Como grande defensor do exercício físico e da higiene, Ramalho promoveu os banhos de mar da Granja como terapia para a alma e o corpo.
+ O Estilo de Vida: 
+Ramalho via na Granja o equilíbrio perfeito entre o repouso e a vida social elegante.
+Os Banhos de Mar:
+Como grande defensor do exercício físico e da higiene, Ramalho promoveu os banhos de mar da Granja como terapia para a alma e o corpo.
 
 Ele fazia parte do grupo de intelectuais que transformou esta praia no centro do pensamento português durante os meses de verão.
 
