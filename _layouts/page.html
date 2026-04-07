@@ -2,74 +2,69 @@
 layout: default
 ---
 <style>
-  /* Ajuste de Texto */
+  /* Tamanho de letra confortável para leitura */
   .post-content {
-    font-size: 1.25rem;
-    line-height: 1.7;
-    color: #333;
-    margin-top: 20px;
+    font-size: 1.3rem; 
+    line-height: 1.6;
+    color: #1a1a1a;
+    margin-top: 30px;
   }
 
-  /* Botão de Áudio no Topo (Estilo Coluna/Ícone) */
-  .audio-top-btn {
-    float: right;
+  /* Painel de Áudio Compacto no Topo */
+  .audio-control-panel {
+    background: #f0f7ff;
+    border: 2px solid #007bff;
+    border-radius: 12px;
+    padding: 15px;
+    margin: 20px 0;
     display: flex;
     align-items: center;
-    gap: 10px;
-    background: #f8f9fa;
-    border: 1px solid #007bff;
-    padding: 8px 15px;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: #007bff;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .btn-audio {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
     font-weight: bold;
-    font-size: 0.9rem;
-  }
-
-  .audio-top-btn:hover {
-    background: #007bff;
-    color: white;
-  }
-
-  /* Ajuste para não quebrar o título */
-  .header-container {
+    cursor: pointer;
+    font-size: 1rem;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.2s;
   }
 
-  @media (max-width: 500px) {
-    .header-container { flex-direction: column; }
-    .audio-top-btn { margin-top: 10px; width: 100%; justify-content: center; }
+  .btn-audio:active { transform: scale(0.95); }
+
+  #btn-ouvir { background: #007bff; color: white; }
+  #btn-parar { background: #dc3545; color: white; display: none; }
+
+  .status-voz {
+    font-size: 0.9rem;
+    color: #0056b3;
+    font-weight: bold;
   }
 </style>
 
 <article class="post">
-  <div class="header-container">
-    <h1 style="margin: 0; font-size: 2.2rem;">{{ page.title }}</h1>
+  <h1 style="font-size: 2.4rem; margin-bottom: 10px; color: #2c3e50;">{{ page.title }}</h1>
+  
+  <div class="audio-control-panel">
+    <span class="status-voz">🔊 Ouvir Biografia:</span>
     
-    <button onclick="document.getElementById('seccao-audio').scrollIntoView({behavior: 'smooth'})" class="audio-top-btn">
-      <span>Ouvir Biografia</span> 🔊
+    <button id="btn-ouvir" class="btn-audio">
+      ▶️ Reproduzir
     </button>
-  </div>
-
-  <div class="post-content">
-    {{ content }}
-  </div>
-
-  <div id="seccao-audio" style="margin-top: 60px; padding: 20px; border-radius: 15px; background: #f1f8ff; text-align: center; border: 1px solid #d0e7ff;">
-    <p style="margin-bottom: 15px; font-weight: bold;">Controlo de Voz</p>
-    <button id="btn-ouvir" style="padding: 12px 25px; background: #007bff; color: white; border: none; border-radius: 30px; cursor: pointer; font-size: 16px;">
-      ▶️ Iniciar Narração
-    </button>
-    <button id="btn-parar" style="padding: 12px 25px; background: #dc3545; color: white; border: none; border-radius: 30px; cursor: pointer; font-size: 16px; display: none;">
+    
+    <button id="btn-parar" class="btn-audio">
       🛑 Parar
     </button>
+  </div>
+
+  <div class="post-content" id="texto-biografia">
+    {{ content }}
   </div>
 </article>
 
@@ -78,24 +73,32 @@ layout: default
   const btnParar = document.getElementById('btn-parar');
 
   btnOuvir.onclick = function() {
-    const texto = document.querySelector('.post-content').innerText;
-    const fala = new SpeechSynthesisUtterance(texto);
-    fala.lang = 'pt-PT';
-    window.speechSynthesis.speak(fala);
-    
-    btnOuvir.style.display = 'none';
-    btnParar.style.display = 'inline-block';
+    // 1. Cancela qualquer voz que esteja a decorrer
+    window.speechSynthesis.cancel();
 
+    // 2. Captura o texto
+    const texto = document.getElementById('texto-biografia').innerText;
+    const fala = new SpeechSynthesisUtterance(texto);
+    fala.lang = 'pt-PT'; // Voz de Portugal
+    fala.rate = 1.0;
+
+    // 3. Inicia a fala
+    window.speechSynthesis.speak(fala);
+
+    // 4. Muda o estado dos botões
+    btnOuvir.style.display = 'none';
+    btnParar.style.display = 'flex';
+
+    // Quando terminar, volta ao estado inicial
     fala.onend = () => {
-      btnOuvir.style.display = 'inline-block';
+      btnOuvir.style.display = 'flex';
       btnParar.style.display = 'none';
     };
   };
 
   btnParar.onclick = function() {
     window.speechSynthesis.cancel();
-    btnOuvir.style.display = 'inline-block';
+    btnOuvir.style.display = 'flex';
     btnParar.style.display = 'none';
   };
-      </script>
-      
+</script>
