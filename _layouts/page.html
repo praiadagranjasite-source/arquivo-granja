@@ -1,1 +1,49 @@
+---
+layout: default
+---
+<article class="post">
+  <h1>{{ page.title }}</h1>
+
+  <div class="post-content">
+    {{ content }}
+  </div>
+
+  <div style="margin-top: 50px; padding: 20px; border: 2px solid #007bff; border-radius: 15px; text-align: center; background-color: #f8f9fa;">
+    <p style="margin-bottom: 10px; font-weight: bold; color: #333;">📢 Gostaria de ouvir este texto?</p>
+    <button id="btn-ouvir" style="padding: 12px 25px; background-color: #007bff; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 16px;">
+      ▶️ Reproduzir Áudio
+    </button>
+    <button id="btn-parar" style="padding: 12px 25px; background-color: #dc3545; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 16px; display: none;">
+      🛑 Parar Leitura
+    </button>
+  </div>
+</article>
+
+<script>
+  const btnOuvir = document.getElementById('btn-ouvir');
+  const btnParar = document.getElementById('btn-parar');
+
+  btnOuvir.onclick = function() {
+    // Captura o texto apenas desta biografia
+    const texto = document.querySelector('.post-content').innerText;
+    const fala = new SpeechSynthesisUtterance(texto);
+    fala.lang = 'pt-PT'; // Voz de Portugal
+    
+    window.speechSynthesis.speak(fala);
+    
+    btnOuvir.style.display = 'none';
+    btnParar.style.display = 'inline-block';
+
+    fala.onend = () => {
+      btnOuvir.style.display = 'inline-block';
+      btnParar.style.display = 'none';
+    };
+  };
+
+  btnParar.onclick = function() {
+    window.speechSynthesis.cancel();
+    btnOuvir.style.display = 'inline-block';
+    btnParar.style.display = 'none';
+  };
+</script>
 
