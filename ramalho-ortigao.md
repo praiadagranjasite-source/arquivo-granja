@@ -1,5 +1,24 @@
 ---
 layout: page
+---
+
+<style>
+  /* Forçar o tamanho da letra apenas nestas páginas */
+  .post-content, .page-content {
+    font-size: 1.3rem !important;
+    line-height: 1.6 !important;
+  }
+</style>
+
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+  <h1 style="margin: 0;">{{ page.title }}</h1>
+  <button id="btn-coluna" style="font-size: 30px; cursor: pointer; background: none; border: none;">🔊</button>
+</div>
+
+<div id="texto-biografia">
+
+---
+layout: page
 title: Ramalho Ortigão
 ---
 
